@@ -1,13 +1,7 @@
 import 'package:ecommerce_app_demo/src/model/products.dart';
 
 class Cart {
-
- static final cart = Cart._internel();
-
- Cart._internel();
-
- factory Cart()=>cart;
-
+  
   late ProductModel _product;
 
   // store Ids
@@ -15,6 +9,7 @@ class Cart {
   List<int> itemIds=[];
 
   // Get product
+  // ignore: unnecessary_getters_setters
   ProductModel get product => _product;
 
   set product(ProductModel newProduct) {
@@ -31,9 +26,6 @@ class Cart {
 
   // add item to cart
 
-  void add(Item item){
-    itemIds.add(item.id);
-  }
 
   void removed(Item item){
     itemIds.remove(item.id);
