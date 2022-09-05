@@ -2,11 +2,6 @@ import 'dart:convert';
 
 class ProductModel {
 
-static final product = ProductModel._internel();
-
- ProductModel._internel();
-
- factory ProductModel()=>product;
 
   static List<Item>? items;
 
@@ -17,6 +12,7 @@ static final product = ProductModel._internel();
   Item getByPossition(int pos)=> 
  items![pos];
 }
+
 
 class Item {
   final int id;

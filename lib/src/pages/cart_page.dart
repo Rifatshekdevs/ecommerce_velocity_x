@@ -1,5 +1,6 @@
 import 'package:ecommerce_app_demo/src/config/constants.dart';
 import 'package:ecommerce_app_demo/src/config/ktext.dart';
+import 'package:ecommerce_app_demo/src/config/store.dart';
 import 'package:ecommerce_app_demo/src/model/cart.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -34,7 +35,7 @@ class CartPage extends StatelessWidget {
 class _CartTotal extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-      final cart = Cart();
+   final Cart cart= (VxState.store as Store).cart;
 
     return SizedBox(
       height: 150,
@@ -69,25 +70,27 @@ class _CartTotal extends StatelessWidget {
   }
 }
 
-class _CartList extends StatefulWidget {
-  @override
-  __CartListState createState() => __CartListState();
-}
+class _CartList extends StatelessWidget {
 
-class __CartListState extends State<_CartList> {
-
-  final cart = Cart();
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
+     final Cart cart= (VxState.store as Store).cart;
+
+
+    return cart.items.isEmpty? Center(child: KText(text: 'No data added')): ListView.builder(
       itemCount: cart.items.length,
       itemBuilder: (context, index) => ListTile(
         leading: Icon(Icons.done),
         trailing: IconButton(
           icon: Icon(Icons.remove_circle_outline),
-          onPressed: () {},
+          onPressed: () {
+            cart.removed(cart.items[index]);
+            // setState(() {
+              
+            // });
+          },
         ),
-        title: "Item 1".text.make(),
+        title: cart.items[index].name.text.make(),
       ),
     );
   }

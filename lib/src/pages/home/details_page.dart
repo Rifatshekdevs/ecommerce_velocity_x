@@ -1,4 +1,5 @@
 import 'package:ecommerce_app_demo/src/config/constants.dart';
+import 'package:ecommerce_app_demo/src/pages/home/add_to_cart.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -29,16 +30,7 @@ class DetailsPage extends StatelessWidget {
           buttonPadding: EdgeInsets.zero,
           children: [
             "\$${product.price}".text.bold.xl4.red800.make(),
-            ElevatedButton(
-              onPressed: () {},
-              style: ButtonStyle(
-                  backgroundColor:
-                      MaterialStateProperty.all(AppColors.iconThemeColor),
-                  shape: MaterialStateProperty.all(
-                    StadiumBorder(),
-                  )),
-              child: "Buy".text.make(),
-            ).wh(100, 50)
+            AddToCart(item: product),
           ],
         ).p32(),
       ),
