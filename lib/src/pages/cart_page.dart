@@ -2,6 +2,7 @@ import 'package:ecommerce_app_demo/src/config/constants.dart';
 import 'package:ecommerce_app_demo/src/config/ktext.dart';
 import 'package:ecommerce_app_demo/src/config/store.dart';
 import 'package:ecommerce_app_demo/src/model/cart.dart';
+import 'package:ecommerce_app_demo/src/model/mutation.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -44,14 +45,23 @@ class _CartTotal extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            KText(
+            VxBuilder(
+              
+              mutations: {RemovedMutation},
+             builder: (context, store, status) {
+               return KText(
               text: '\$${cart.totalPrice}',
               fontSize: 20,
               fontWeight: FontWeight.bold,
               color: AppColors.iconThemeColor,
-            ),
+            );
+             },
+              ),
+            
             ElevatedButton(
-              onPressed: () {},
+              onPressed: () {
+                ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: KText(text: 'Buying not supported yet',color: Colors.red,)));
+              },
               style: ButtonStyle(
                   backgroundColor: MaterialStateProperty.all(
                     AppColors.iconThemeColor,
@@ -74,6 +84,7 @@ class _CartList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    VxState.watch(context, on: [RemovedMutation]);
      final Cart cart= (VxState.store as Store).cart;
 
 
@@ -84,7 +95,7 @@ class _CartList extends StatelessWidget {
         trailing: IconButton(
           icon: Icon(Icons.remove_circle_outline),
           onPressed: () {
-            cart.removed(cart.items[index]);
+            RemovedMutation(cart.items[index]);
             // setState(() {
               
             // });

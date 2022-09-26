@@ -27,7 +27,5 @@ class Cart {
   // add item to cart
 
 
-  void removed(Item item){
-    itemIds.remove(item.id);
-  }
+  
 }

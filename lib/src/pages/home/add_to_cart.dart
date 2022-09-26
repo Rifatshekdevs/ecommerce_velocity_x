@@ -1,7 +1,8 @@
 // ignore_for_file: deprecated_member_use
 
+import 'package:ecommerce_app_demo/src/config/constants.dart';
 import 'package:ecommerce_app_demo/src/config/store.dart';
-import 'package:ecommerce_app_demo/src/model/addmutation.dart';
+import 'package:ecommerce_app_demo/src/model/mutation.dart';
 import 'package:ecommerce_app_demo/src/model/cart.dart';
 import 'package:ecommerce_app_demo/src/model/products.dart';
 import 'package:flutter/cupertino.dart';
@@ -17,7 +18,7 @@ class AddToCart extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    VxState.watch(context,on: [AddMutation]);
+    VxState.watch(context,on: [AddMutation,RemovedMutation]);
    final Cart _cart= (VxState.store as Store).cart;
     bool isInCart = _cart.items.contains(item) ?? false;
     return ElevatedButton(
@@ -28,7 +29,7 @@ class AddToCart extends StatelessWidget {
         }
       },
       style: ButtonStyle(
-          backgroundColor: MaterialStateProperty.all(context.theme.buttonColor),
+          backgroundColor: MaterialStateProperty.all(AppColors.iconThemeColor),
           shape: MaterialStateProperty.all(
             StadiumBorder(),
           )),
